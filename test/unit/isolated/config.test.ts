@@ -26,6 +26,15 @@ describe('config', () => {
     expect((config as any).customConfig).toBe(true)
   })
 
+  it('normalizes config after a raw preflight read', async () => {
+    await loadConfig(PHASE_DEVELOPMENT_SERVER, pathToConfig, {
+      rawConfig: true,
+    })
+
+    const config = await loadConfig(PHASE_DEVELOPMENT_SERVER, pathToConfig)
+    expect(config.experimental).toBeDefined()
+  })
+
   it('Should pass the phase correctly', async () => {
     const config = await loadConfig(PHASE_DEVELOPMENT_SERVER, pathToConfigFn)
     expect((config as any).phase).toBe(PHASE_DEVELOPMENT_SERVER)
