@@ -2112,13 +2112,8 @@ async function loadConfigImpl(
       updateInitialEnv(newEnv)
 
       if (rawConfig) {
-        // Cache the raw config
-        configCache.set(cacheKey, {
-          config: userConfigModule as NextConfigComplete,
-          rawConfig: userConfigModule,
-          configuredExperimentalFeatures,
-        })
-
+        // A later ordinary config load in this process still needs defaults
+        // and validation. Do not cache this unprocessed module as complete.
         reportExperimentalFeatures?.(configuredExperimentalFeatures)
 
         return [userConfigModule, meta]
