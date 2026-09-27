@@ -8,11 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+model CatatanTeks {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  isi_teks   String   // <--- CARI TULISAN SEPERTI INI
+}
+
 }
 
 model Post {
